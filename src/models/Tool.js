@@ -7,11 +7,9 @@ const Tool = new mongoose.Schema({
   },
   link: {
     type: String,
-    required: true,
   },
   description: {
     type: String,
-    required: true,
   },
   tags: [String],
 },
