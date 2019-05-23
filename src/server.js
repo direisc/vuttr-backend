@@ -7,8 +7,8 @@ const app = express();
 app.use(cors());
 
 mongoose.connect(
-	// 'mongodb+srv://boxfiles:boxFiles2019@cluster0-jcs5n.mongodb.net/vuttr?retryWrites=true',
-	'mongodb://127.0.0.1/vuttr?retryWrites=true',
+	'mongodb+srv://boxfiles:boxFiles2019@cluster0-jcs5n.mongodb.net/vuttr?retryWrites=true',
+	// 'mongodb://127.0.0.1/vuttr?retryWrites=true',
 	{
 		useNewUrlParser: true
 	}
