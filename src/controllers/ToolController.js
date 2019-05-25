@@ -1,27 +1,34 @@
 const Tool = require('../models/Tool');
 
 class ToolController {
-	async store(req, res) {
-		const tool = await Tool.create(req.body);
-		return res.json(tool);
+	async store(req, res, next) {
+		try {
+			const tool = await Tool.create(req.body);
+			return res.json(tool);
+		} catch (error) {
+			console.log(error);
+			next(error);
+		}
 	}
 
 	async find(req, res) {
-		if(req.query.q) {
+		if (req.query.q) {
 			var regex = new RegExp(req.query.q, "i"),
-			query = {$or:[
-				{description: regex},
-				{title: regex},
-				{link: regex},
-				{tags: { $in:[regex] } }
-			]};
+				query = {
+					$or: [
+						{ description: regex },
+						{ title: regex },
+						{ link: regex },
+						{ tags: { $in: [regex] } }
+					]
+				};
 			const tools = await Tool.find(query);
 			res.json(tools);
 			return;
 		}
-		if(req.query.tags_like) {
+		if (req.query.tags_like) {
 			var regex = new RegExp(req.query.tags_like, "i"),
-			query = { tags: { $in:[regex] } };
+				query = { tags: { $in: [regex] } };
 			const tools = await Tool.find(query);
 			res.json(tools);
 			return;
